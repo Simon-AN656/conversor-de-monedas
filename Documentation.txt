@@ -2,6 +2,8 @@ Esta es la API Key generada para determinadas request:
 API key 77c6c01ad7eeeb6ea0e799ff
 Guia de uso:
 GET Request API Pair https://v6.exchangerate-api.com/v6/YOUR-API-KEY/pair/EUR/GBP
+https://v6.exchangerate-api.com/v6/77c6c01ad7eeeb6ea0e799ff/pair/EUR/GBP
+
 
 Con el link anterior es para la utilizacion de una conversion par, solo se tiene que sustituir el espacio indicado
 para la API key y en las dos ultimas instancias la primera corresponde al codigo base de cambio que vamos a convertir
