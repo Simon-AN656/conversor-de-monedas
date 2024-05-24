@@ -49,9 +49,10 @@ public class Principal {
                     generador.guardarJson(conversion);
                 } else if (selection == 9) {
                     System.out.println("Saliendo del menú.");
+                    return;
                 } else {
                     System.out.println("Opción no válida, por favor selecciona una opción del 1 al 9.");
-                }return;
+                }
 
             } catch (NumberFormatException e) {
                 System.out.println("Ingresaste un caracter en lugar de un numero");
