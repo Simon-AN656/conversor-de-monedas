@@ -7,6 +7,17 @@ public class Principal {
     public static void main(String[] args) throws IOException {
         ApiRequest resultConvert = new ApiRequest();
         Scanner readMenu = new Scanner(System.in);
+        String menu = ("""
+                Menu:
+                1.- Dolar a Peso Argentino
+                2.- Peso Argentino a Dolar
+                3.- Dolar a Real Brasileño
+                4.- Real Brasileño a Dolar
+                5.- Dolar a Peso Colombiano
+                6.- Peso Colombiano a Dolar
+                7.- Dolar a Peso Mexicano
+                8.- Peso Mexicano a Dolar
+                9.- Salir""");
         String[][] conversions = {
                 {"USD", "ARS", "Dolar a Peso Argentino"},
                 {"ARS", "USD", "Peso Argentino a Dolar"},
@@ -19,18 +30,7 @@ public class Principal {
         };
 
         while (true) {
-            System.out.println("Menu:");
-            System.out.println("1.- Dolar a Peso Argentino");
-            System.out.println("2.- Peso Argentino a Dolar");
-            System.out.println("3.- Dolar a Real Brasileño");
-            System.out.println("4.- Real Brasileño a Dolar");
-            System.out.println("5.- Dolar a Peso Colombiano");
-            System.out.println("6.- Peso Colombiano a Dolar");
-            System.out.println("7.- Dolar a Peso Mexicano");
-            System.out.println("8.- Peso Mexicano a Dolar");
-            System.out.println("9.- Salir");
-
-            System.out.print("Selecciona una opción: ");
+            System.out.println(menu);
             try {
                 int selection = Integer.parseInt(readMenu.nextLine());
 
@@ -47,6 +47,7 @@ public class Principal {
                     generador.guardarJson(conversion);
                 } else if (selection == 9) {
                     System.out.println("Saliendo del menú.");
+                    return;
                 } else {
                     System.out.println("Opción no válida, por favor selecciona una opción del 1 al 9.");
                 }
