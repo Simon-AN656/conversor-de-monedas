@@ -7,8 +7,16 @@ public class Principal {
     public static void main(String[] args) throws IOException {
         ApiRequest resultConvert = new ApiRequest();
         Scanner readMenu = new Scanner(System.in);
-        String baseConvert;
-        String targetConvert;
+        String[][] conversions = {
+                {"USD", "ARS", "Dolar a Peso Argentino"},
+                {"ARS", "USD", "Peso Argentino a Dolar"},
+                {"USD", "BRL", "Dolar a Real Brasileño"},
+                {"BRL", "USD", "Real Brasileño a Dolar"},
+                {"USD", "COP", "Dolar a Peso Colombiano"},
+                {"COP", "USD", "Peso Colombiano a Dolar"},
+                {"USD", "MXN", "Dolar a Peso Mexicano"},
+                {"MXN", "USD", "Peso Mexicano a Dolar"}
+        };
 
         while (true) {
             System.out.println("Menu:");
@@ -26,80 +34,24 @@ public class Principal {
             try {
                 int selection = Integer.parseInt(readMenu.nextLine());
 
-                switch (selection) {
-                    case 1:
-                        baseConvert = "USD";
-                        targetConvert = "ARS";
-                        Conversor conversionDA = resultConvert.conversion(baseConvert, targetConvert);
-                        System.out.println("Conversion de Dolar a Peso Argentino: " + conversionDA.conversion_rate());
-                        GeneradorArchivos generadorDA = new GeneradorArchivos();
-                        generadorDA.guardarJson(conversionDA);
-                        break;
-                    case 2:
-                        baseConvert = "ARS";
-                        targetConvert = "USD";
-                        Conversor conversionAD = resultConvert.conversion(baseConvert, targetConvert);
-                        System.out.println("Conversion de Peso Argentino a Dolar: " + conversionAD.conversion_rate());
-                        GeneradorArchivos generadorAD = new GeneradorArchivos();
-                        generadorAD.guardarJson(conversionAD);
-                        break;
-                    case 3:
-                        baseConvert = "USD";
-                        targetConvert = "BRL";
-                        Conversor conversionUB = resultConvert.conversion(baseConvert, targetConvert);
-                        System.out.println("Conversion de Dolar a Real Brasileño: " + conversionUB.conversion_rate());
-                        GeneradorArchivos generadorUB = new GeneradorArchivos();
-                        generadorUB.guardarJson(conversionUB);
-                        break;
-                    case 4:
-                        baseConvert = "BRL";
-                        targetConvert = "USD";
-                        Conversor conversionBD = resultConvert.conversion(baseConvert, targetConvert);
-                        System.out.println("Conversion de Real Brasileño a Dolar: " + conversionBD.conversion_rate());
-                        GeneradorArchivos generadorBD = new GeneradorArchivos();
-                        generadorBD.guardarJson(conversionBD);
-                        break;
-                    case 5:
-                        baseConvert = "USD";
-                        targetConvert = "COP";
-                        Conversor conversionDC = resultConvert.conversion(baseConvert, targetConvert);
-                        System.out.println("Conversion de Dolar a Peso Colombiano: " + conversionDC.conversion_rate());
-                        GeneradorArchivos generadorDC = new GeneradorArchivos();
-                        generadorDC.guardarJson(conversionDC);
-                        break;
-                    case 6:
-                        baseConvert = "COP";
-                        targetConvert = "USD";
-                        Conversor conversionCD = resultConvert.conversion(baseConvert, targetConvert);
-                        System.out.println("Conversion de Peso Colombiano a Dolar: " + conversionCD.conversion_rate());
-                        GeneradorArchivos generadorCD = new GeneradorArchivos();
-                        generadorCD.guardarJson(conversionCD);
-                        break;
-                    case 7:
-                        baseConvert = "USD";
-                        targetConvert = "MXN";
-                        Conversor conversionDM = resultConvert.conversion(baseConvert, targetConvert);
-                        System.out.println("Conversion de Dolar a Peso Mexicano: " + conversionDM.conversion_rate());
-                        GeneradorArchivos generadorDM = new GeneradorArchivos();
-                        generadorDM.guardarJson(conversionDM);
-                        break;
-                    case 8:
-                        baseConvert = "MXN";
-                        targetConvert = "USD";
-                        Conversor conversionMD = resultConvert.conversion(baseConvert, targetConvert);
-                        System.out.println("Conversion de Peso Mexicano a Dolar: " + conversionMD.conversion_rate());
-                        GeneradorArchivos generadorMD = new GeneradorArchivos();
-                        generadorMD.guardarJson(conversionMD);
-                        break;
-                    case 9:
-                        System.out.println("Saliendo del menú.");
-                        return;
-                    default:
-                        System.out.println("Opción no válida, por favor selecciona una opción del 1 al 9.");
-                        break;
+                if (selection >= 1 && selection <= conversions.length) {
+                    String[] selectedConversion = conversions[selection - 1];
+                    String baseConvert = selectedConversion[0];
+                    String targetConvert = selectedConversion[1];
+                    String description = selectedConversion[2];
+
+                    Conversor conversion = resultConvert.conversion(baseConvert, targetConvert);
+                    System.out.println("Conversion de " + description + ": " + conversion.conversion_rate());
+
+                    GeneradorArchivos generador = new GeneradorArchivos();
+                    generador.guardarJson(conversion);
+                } else if (selection == 9) {
+                    System.out.println("Saliendo del menú.");
+                } else {
+                    System.out.println("Opción no válida, por favor selecciona una opción del 1 al 9.");
                 }
 
-            }catch (NumberFormatException e){
+            } catch (NumberFormatException e) {
                 System.out.println("Ingresaste un caracter en lugar de un numero");
             }
         }
