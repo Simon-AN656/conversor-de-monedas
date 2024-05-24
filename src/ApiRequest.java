@@ -7,10 +7,9 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 public class ApiRequest {
-    public Conversor convercion (String baseConvert, String targetConvert){
+    public Conversor conversion (String baseConvert, String targetConvert){
         URI apiDirection = URI.create("https://v6.exchangerate-api.com/v6/77c6c01ad7eeeb6ea0e799ff/pair/"
                 +baseConvert+"/"+targetConvert);
-        //URI apiDirection = URI.create("https://v6.exchangerate-api.com/v6/77c6c01ad7eeeb6ea0e799ff/latest/"+baseConvert);
 
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
